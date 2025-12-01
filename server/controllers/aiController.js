@@ -4,12 +4,12 @@ import { v2 as cloudinary } from "cloudinary";
 import FormData from "form-data";
 import fs from 'fs';
 import OpenAI from "openai";
-// import pdf from "pdf-parse/lib/pdf-parse.js";
-// import pdf from "pdf-parse";
-// import extract from "pdf-extract-text";
-// import * as pdf from "pdf-parse";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
+const pdfParse = require("pdf-parse"); // ✅ Node-safe PDF parser
+
 import sql from "../configs/db.js";
-import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 
 
 const AI = new OpenAI({
@@ -255,6 +255,7 @@ async function extractPdfText(filePath) {
 
 
 
+
 export const resumeReview = async (req, res) => {
   try {
     const { userId } = req.auth();
@@ -282,8 +283,10 @@ export const resumeReview = async (req, res) => {
       });
     }
 
-    // ⬇️ REPLACED pdf-parse with pdfjs-dist ⬇️
-    const pdfText = await extractPdfText(resume.path);
+    // ✅ Node-safe PDF text extraction
+    const dataBuffer = fs.readFileSync(resume.path);
+    const pdfData = await pdfParse(dataBuffer);
+    const pdfText = pdfData.text;
 
     const prompt = `Review the following resume and provide constructive feedback on its strength, weakness and areas for improvement.
 
@@ -307,7 +310,7 @@ ${pdfText}
 
     await sql`
       INSERT INTO creations (user_id, prompt, content, type)
-      VALUES (${userId},'Review the uploaded resume', ${content},'resume-review')
+      VALUES (${userId}, 'Review the uploaded resume', ${content}, 'resume-review')
     `;
 
     res.json({ success: true, content });
