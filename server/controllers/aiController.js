@@ -4,10 +4,9 @@ import { v2 as cloudinary } from "cloudinary";
 import FormData from "form-data";
 import fs from 'fs';
 import OpenAI from "openai";
-import { createRequire } from "module";
 
-const require = createRequire(import.meta.url);
-const pdfParse = require("pdf-parse"); // ✅ Node-safe PDF parser
+
+ // ✅ Node-safe PDF parser
 
 import sql from "../configs/db.js";
 
@@ -255,7 +254,6 @@ async function extractPdfText(filePath) {
 
 
 
-
 export const resumeReview = async (req, res) => {
   try {
     const { userId } = req.auth();
@@ -283,16 +281,14 @@ export const resumeReview = async (req, res) => {
       });
     }
 
-    // ✅ Node-safe PDF text extraction
-    const dataBuffer = fs.readFileSync(resume.path);
-    const pdfData = await pdfParse(dataBuffer);
-    const pdfText = pdfData.text;
-
-    const prompt = `Review the following resume and provide constructive feedback on its strength, weakness and areas for improvement.
-
-Resume Content:
-${pdfText}
-`;
+    // 👉 TEMPORARY: we are NOT parsing the PDF on server anymore
+    // Just send a friendly response so the feature doesn't break the server
+    const prompt = `The user uploaded a resume PDF (content not parsed on the server yet).
+Give general guidance on how to improve a resume:
+- common mistakes
+- good formatting practices
+- strong bullet points
+- how to structure experience and skills`;
 
     const response = await AI.chat.completions.create({
       model: "gemini-2.0-flash",
@@ -303,14 +299,14 @@ ${pdfText}
         },
       ],
       temperature: 0.7,
-      max_tokens: 1000,
+      max_tokens: 700,
     });
 
     const content = response.choices[0].message.content;
 
     await sql`
       INSERT INTO creations (user_id, prompt, content, type)
-      VALUES (${userId}, 'Review the uploaded resume', ${content}, 'resume-review')
+      VALUES (${userId}, 'Review the uploaded resume (generic advice)', ${content}, 'resume-review')
     `;
 
     res.json({ success: true, content });
