@@ -39,24 +39,33 @@ const BlogTitles = () => {
 
     try {
       setLoading(true)
-      const prompt = `Generate a blog title for the keyword "${input}" in the category "${selectedCategory}". Return 5–10 catchy options in markdown list format.`
+     
 
       const token = await getToken()
-      const { data } = await axios.post(
-        '/api/ai/generate-blog-title',
-        { prompt },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+     
+const { data } = await axios.post(
+  '/api/ai/generate-blog-title',
+  {
+    keyword: input,
+    category: selectedCategory
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+)
 
-      if (data.success) {
-        setContent(data.content)
-      } else {
-        toast.error(data.message || 'Something went wrong')
-      }
+
+
+
+
+   if (data.success) {
+  setContent(data.content)
+  toast.success('Blog titles generated successfully')
+} else {
+  toast.error(data.message || 'Something went wrong')
+}
     } catch (error) {
       console.error(error)
       toast.error('Failed to generate title. Please try again.')
