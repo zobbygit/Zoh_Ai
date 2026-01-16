@@ -32,7 +32,7 @@ const WriteArticle = () => {
     try {
       setLoading(true)
 
-      const prompt = `Write an article about ${input} in ${selectedLength.text}`
+      const prompt = `An article about ${input} in ${selectedLength.text}`
       const token = await getToken()
 
       const { data } = await axios.post('/api/ai/generate-article',
