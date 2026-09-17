@@ -14,6 +14,9 @@ const AI = new OpenAI({
   apiKey: process.env.GROQ_API_KEY,
   baseURL: "https://api.groq.com/openai/v1",
 });
+// =======================
+// 1. ARTICLE GENERATION
+// =======================
 
 // Current Groq production model.
 // You can change this later without changing the controller.
@@ -455,18 +458,8 @@ export const removeImageBackground = async (req, res) => {
     );
 
     await sql`
-      INSERT INTO creations (
-        user_id,
-        prompt,
-        content,
-        type
-      )
-      VALUES (
-        ${userId},
-        'Remove background from image',
-        ${uploadResult.secure_url},
-        'image'
-      )
+      INSERT INTO creations (user_id, prompt, content, type)
+      VALUES (${userId}, 'Remove background from image', ${uploadResult.secure_url}, 'image')
     `;
 
     res.json({
