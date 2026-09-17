@@ -58,21 +58,85 @@ Cloudinary — Image & video hosting/processing
 
 
 📂 Project Structure
-Zoh_Ai/
-│── client/               # React + Vite frontend
-│   ├── src/
-│   │   ├── pages/
-│   │   ├── components/
-│   │   ├── assets/
-│   │   └── app.jsx/
-│── server/               # Express backend
-│   ├── controllers/
-│   ├── routes/
-│   ├── configs/
-│   └── middlewares/
-│── database/             # Neon postgres setup
-│── README.md
-└── package.json
+# File Tree: Zoh_Ai
+
+
+
+```
+├── 📁 client
+│   ├── 📁 public
+│   │   ├── 🖼️ ai-assistant.png
+│   │   ├── 🖼️ gradientBackground.png
+│   │   └── 🖼️ hero.png
+│   ├── 📁 src
+│   │   ├── 📁 assets
+│   │   │   ├── 🖼️ ai_gen_img_1.png
+│   │   │   ├── 🖼️ ai_gen_img_2.png
+│   │   │   ├── 🖼️ ai_gen_img_3.png
+│   │   │   ├── 🖼️ arrow_icon.svg
+│   │   │   ├── 📄 assets.js
+│   │   │   ├── 🖼️ favicon.svg
+│   │   │   ├── 🖼️ logo.svg
+│   │   │   ├── 🖼️ neww.svg
+│   │   │   ├── 🖼️ profile_img_1.png
+│   │   │   ├── 🖼️ star_dull_icon.svg
+│   │   │   ├── 🖼️ star_icon.svg
+│   │   │   ├── 🖼️ user_group.png
+│   │   │   └── 🎬 zohai.mp4
+│   │   ├── 📁 components
+│   │   │   ├── 📄 AiTools.jsx
+│   │   │   ├── 📄 CreationItem.jsx
+│   │   │   ├── 📄 Footer.jsx
+│   │   │   ├── 📄 Hero.jsx
+│   │   │   ├── 📄 Navbar.jsx
+│   │   │   ├── 📄 Plan.jsx
+│   │   │   ├── 📄 Sidebar.jsx
+│   │   │   └── 📄 Testimonial.jsx
+│   │   ├── 📁 pages
+│   │   │   ├── 📄 BlogTitles.jsx
+│   │   │   ├── 📄 Community.jsx
+│   │   │   ├── 📄 Dashboard.jsx
+│   │   │   ├── 📄 GenerateImages.jsx
+│   │   │   ├── 📄 Home.jsx
+│   │   │   ├── 📄 Layout.jsx
+│   │   │   ├── 📄 RemoveBackground.jsx
+│   │   │   ├── 📄 RemoveObject.jsx
+│   │   │   ├── 📄 ReviewResume.jsx
+│   │   │   ├── 📄 WatchDemo.jsx
+│   │   │   └── 📄 WriteArticle.jsx
+│   │   ├── 📄 App.jsx
+│   │   ├── 🎨 index.css
+│   │   └── 📄 main.jsx
+│   ├── ⚙️ .gitignore
+│   ├── 📝 README.md
+│   ├── 📄 eslint.config.js
+│   ├── 🌐 index.html
+│   ├── ⚙️ package-lock.json
+│   ├── ⚙️ package.json
+│   ├── ⚙️ vercel.json
+│   └── 📄 vite.config.js
+├── 📁 server
+│   ├── 📁 configs
+│   │   ├── 📄 cloudinary.js
+│   │   ├── 📄 db.js
+│   │   └── 📄 multer.js
+│   ├── 📁 controllers
+│   │   ├── 📄 aiController.js
+│   │   └── 📄 userController.js
+│   ├── 📁 middlewares
+│   │   └── 📄 auth.js
+│   ├── 📁 routes
+│   │   ├── 📄 aiRoutes.js
+│   │   └── 📄 userRoutes.js
+│   ├── ⚙️ package-lock.json
+│   ├── ⚙️ package.json
+│   ├── 📄 server.js
+│   └── ⚙️ vercel.json
+├── ⚙️ .gitignore
+├── 📝 README.md
+└── 📄 note.txt
+```
+
 
 🔐 Authentication (Clerk)
 
