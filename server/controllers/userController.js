@@ -20,40 +20,6 @@ res.json({success:true,creations})
  }   
 }
 
-// export const toggleLikeCreations = async (req, res) => {
-//   try {
-//     const { userId } = req.auth()
-//     const { id } = req.body
-
-//     const [creation] = await sql`SELECT * FROM creations WHERE id = ${id}`
-
-//     if (!creation) {
-//       return res.json({ success: false, message: "Creation not Found" })
-//     }
-
-//     const currentLikes = creation.likes || []
-//     const userIdStr = userId.toString()
-//     let updatedLikes
-//     let message
-
-//     if (currentLikes.includes(userIdStr)) {
-//       // FIXED: Change == to !== to actually remove the user
-//       updatedLikes = currentLikes.filter((user) => user !== userIdStr)
-//       message = 'Creation Unliked'
-//     } else {
-//       updatedLikes = [...currentLikes, userIdStr]
-//       message = 'Creation Liked'
-//     }
-
-//     const formattedArray = `{${updatedLikes.join(',')}}`
-
-//     await sql`UPDATE creations SET likes = ${formattedArray}::text[] WHERE id = ${id}`
-
-//     res.json({ success: true, message, likes: updatedLikes })
-//   } catch (error) {
-//     res.json({ success: false, message: error.message })
-//   }
-// }
 
 
 

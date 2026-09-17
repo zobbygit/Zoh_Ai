@@ -1,5 +1,5 @@
 
-import { FunnelIcon, Scissors, Sparkles, SparkleIcon } from 'lucide-react'
+import { FunnelIcon, Scissors, Sparkles, SparkleIcon,X } from 'lucide-react'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
@@ -50,7 +50,10 @@ const RemoveObject = () => {
     }
     setLoading(false)
   }
-
+const removeGenerated = () => {
+  setContent("");
+  toast.success("Generated image removed.");
+};
   return (
     <div className='min-h-screen overflow-y-scroll p-4 md:p-6 lg:p-12 bg-gradient-to-br from-purple-50 via-violet-50 to-purple-100'>
       <div className='max-w-7xl mx-auto'>
@@ -181,11 +184,31 @@ const RemoveObject = () => {
                   </div>
                 </div>
               </div>
-            ) : (
-              <div className='mt-3 h-full overflow-hidden rounded-xl border-2 border-purple-200 shadow-inner'>
-                <img src={content} alt='Processed Image' className='w-full h-full object-cover' />
-              </div>
-            )}
+
+) : (
+  <div className="relative mt-3 h-full overflow-hidden rounded-xl border-2 border-purple-200 shadow-inner group">
+
+    {/* Generated Image */}
+    <img
+      src={content}
+      alt="Processed Image"
+      className="w-full h-full object-cover"
+    />
+
+    {/* Remove Generated Result */}
+    <button
+      type="button"
+      onClick={removeGenerated}
+      title="Remove generated image"
+      className="absolute top-3 right-3 p-2 rounded-full bg-pink-100/95 text-pink-600 border border-pink-300 shadow-lg hover:bg-pink-200 hover:text-pink-700 hover:scale-110 transition-all duration-200"
+    >
+      <X className="w-5 h-5" />
+    </button>
+
+  </div>
+)}
+
+
           </div>
         </div>
 
