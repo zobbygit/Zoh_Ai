@@ -4,6 +4,7 @@ import FormData from "form-data";
 import fs from "fs";
 import OpenAI from "openai";
 import sql from "../configs/db.js";
+import "pdf-parse/worker";
 import { PDFParse } from "pdf-parse";
 
 // ======================================================
